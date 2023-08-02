@@ -32,21 +32,13 @@ workflows:
           echo "$GOOGLE_CREDENTIALS" > ./gcloud_key_file.json
           gcloud auth activate-service-account --key-file=gcloud_key_file.json
           gcloud --quiet config set project $FIREBASE_PROJECT
-
-          # Build APK with Flutter (if not already built)
-          flutter build apk --release
-
+          
           # Install Firebase CLI
           if ! command -v firebase &> /dev/null; then
             npm install -g firebase-tools
           fi
 
-          # Authenticate with Firebase CLI using the token
-          firebase login:ci --token "$FIREBASE_TOKEN"
-
-          # Upload the APK to Firebase App Distribution
-          firebase appdistribution:distribute "build/app/outputs/flutter-apk/app-release.apk" --release-notes "New release" --testers-file "testers.txt" --token "$FIREBASE_TOKEN" --project "$FIREBASE_PROJECT"
-
+          firebase --token "$FIREBASE_TOKEN" appdistribution:distribute "build/app/outputs/flutter-apk/app-release.apk" --release-notes "New release" --testers-file "testers.txt" --project "$FIREBASE_PROJECT"
     artifacts:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/*.aab
