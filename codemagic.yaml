@@ -38,12 +38,8 @@ workflows:
             npm install -g firebase-tools
           fi
 
-          # print $FIREBASE_PROJECT and "$FIREBASE_TOKEN"
-          cat $FIREBASE_PROJECT
-          cat "$FIREBASE_TOKEN"
-
           # Authenticate with Firebase CLI using the token directly
-          firebase --token "$FIREBASE_TOKEN" appdistribution:distribute "build/app/outputs/flutter-apk/app-release.apk" --release-notes "New release" --app $FIREBASE_PROJECT
+          firebase --token "1//03r6HRaPnKohACgYIARAAGAMSNgF-L9IrDJ_0ntatFSzzboXTi-q0GsRf2NnoSy_zwGinp08mrjVX57vJ_r_YnQk98cQhpTCaUg" appdistribution:distribute "build/app/outputs/flutter-apk/app-release.apk" --release-notes "New release" --app "flutter-cicd-8e9bf"
     artifacts:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/*.aab
