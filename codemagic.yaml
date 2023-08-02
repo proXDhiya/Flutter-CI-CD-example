@@ -30,7 +30,7 @@ workflows:
           # Log in to Firebase with your credentials (replace 'YOUR_FIREBASE_TOKEN' with your actual token)
           firebase login:ci --token "YOUR_FIREBASE_TOKEN"
           # Deploy the APK to Firebase Distribution (replace 'YOUR_APP_ID' with your Firebase app ID)
-          firebase appdistribution:distribute "$CM_BUILD_DIR/android/app/build/outputs/apk/release/app-release.apk" --app "YOUR_APP_ID" --release-notes "New release" --testers "your-email@example.com" --groups "group-name"
+          firebase appdistribution:distribute "$CM_BUILD_DIR/android/app/build/outputs/apk/release/app-release.apk" --app "flutter-cicd-8e9bf" --release-notes "New release"
       # - name: Publish to Firebase App Distribution
       #   script: |
       #     set -e
