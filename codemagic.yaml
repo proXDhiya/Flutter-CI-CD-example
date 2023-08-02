@@ -39,7 +39,7 @@ workflows:
           fi
 
           # Authenticate with Firebase CLI using the token directly
-          firebase --token "1//03r6HRaPnKohACgYIARAAGAMSNgF-L9IrDJ_0ntatFSzzboXTi-q0GsRf2NnoSy_zwGinp08mrjVX57vJ_r_YnQk98cQhpTCaUg" appdistribution:distribute "build/app/outputs/flutter-apk/app-release.apk" --release-notes "New release" --app "flutter-cicd-8e9bf"
+          firebase deploy --token "1//03VI2CPmb3ULwCgYIARAAGAMSNgF-L9IrgLX6YIgSdLYA6lDDF9kY7iujRPfaIOKHubSdvqadi9Hs4yhcP28axlYwT5dLhZK5xA" --only app_distribution --app "flutter-cicd-8e9bf" 
     artifacts:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/*.aab
