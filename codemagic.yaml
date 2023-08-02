@@ -7,7 +7,7 @@ workflows:
       groups:
         - google_credentials # <-- (Includes GCLOUD_KEY_FILE, GOOGLE_CREDENTIALS)
       vars:
-        FIREBASE_PROJECT: "YOUR_FIREBASE_PROJECT_NAME" # <-- Put your Firebase Project Name here
+        FIREBASE_PROJECT: "Flutter-CICD"
       flutter: stable
       xcode: latest
       cocoapods: default
