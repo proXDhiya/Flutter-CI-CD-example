@@ -39,7 +39,7 @@ workflows:
           fi
 
           # Authenticate with Firebase CLI using the token directly
-          firebase --token "$FIREBASE_TOKEN" appdistribution:distribute "build/app/outputs/flutter-apk/app-release.apk" --release-notes "New release" --testers-file "testers.txt" --app $FIREBASE_PROJECT
+          firebase --token "$FIREBASE_TOKEN" appdistribution:distribute "build/app/outputs/flutter-apk/app-release.apk" --release-notes "New release" --app $FIREBASE_PROJECT
     artifacts:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/*.aab
