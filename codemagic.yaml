@@ -8,6 +8,7 @@ workflows:
         - google_credentials # <-- (Includes GCLOUD_KEY_FILE, GOOGLE_CREDENTIALS)
       vars:
         FIREBASE_PROJECT: "flutter-cicd-8e9bf"
+        FIREBASE_TOKEN: "1//03r6HRaPnKohACgYIARAAGAMSNgF-L9IrDJ_0ntatFSzzboXTi-q0GsRf2NnoSy_zwGinp08mrjVX57vJ_r_YnQk98cQhpTCaUg"
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -38,13 +39,10 @@ workflows:
           fi
 
           # Authenticate with Firebase CLI
-          firebase login:ci --no-localhost --token "1//03r6HRaPnKohACgYIARAAGAMSNgF-L9IrDJ_0ntatFSzzboXTi-q0GsRf2NnoSy_zwGinp08mrjVX57vJ_r_YnQk98cQhpTCaUg"
-
-          # Set Firebase project
-          firebase use --add $FIREBASE_PROJECT
+          firebase use --add $FIREBASE_PROJECT --token $FIREBASE_TOKEN
 
           # Upload the APK to Firebase App Distribution
-          firebase appdistribution:distribute "build/app/outputs/apk/release/app-release.apk" --release-notes "New release" --testers-file "testers.txt" --token "1//03r6HRaPnKohACgYIARAAGAMSNgF-L9IrDJ_0ntatFSzzboXTi-q0GsRf2NnoSy_zwGinp08mrjVX57vJ_r_YnQk98cQhpTCaUg"
+          firebase appdistribution:distribute "build/app/outputs/apk/release/app-release.apk" --release-notes "New release" --testers-file "testers.txt" --token $FIREBASE_TOKEN 
     artifacts:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/*.aab
