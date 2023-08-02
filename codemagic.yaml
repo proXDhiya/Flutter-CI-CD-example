@@ -7,7 +7,7 @@ workflows:
       groups:
         - google_credentials # <-- (Includes GCLOUD_KEY_FILE, GOOGLE_CREDENTIALS)
       vars:
-        FIREBASE_PROJECT: "Flutter-CICD"
+        FIREBASE_PROJECT: "flutter-cicd-8e9bf"
       flutter: stable
       xcode: latest
       cocoapods: default
