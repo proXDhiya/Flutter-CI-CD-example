@@ -28,7 +28,7 @@ workflows:
       - name: Publish to Firebase App Distribution
         script: |
           set -e
-          echo $GCLOUD_KEY_FILE > ./gcloud_key_file.json
+          echo "$GOOGLE_CREDENTIALS" > ./gcloud_key_file.json
           gcloud auth activate-service-account --key-file=gcloud_key_file.json
           gcloud --quiet config set project $FIREBASE_PROJECT
           gcloud firebase test android run --type robo --app build/app/outputs/apk/release/app-release.apk --timeout 30m
