@@ -24,7 +24,14 @@ workflows:
           flutter packages pub get
       - name: Build APK with Flutter
         script: |
-          flutter build apk --debug
+          flutter build apk --release
+      - name: Publish to Firebase App Distribution
+        script: |
+          set -e
+          echo $GCLOUD_KEY_FILE > ./gcloud_key_file.json
+          gcloud auth activate-service-account --key-file=gcloud_key_file.json
+          gcloud --quiet config set project $FIREBASE_PROJECT
+          gcloud firebase test android run --type robo --app build/app/outputs/apk/release/app-release.apk --timeout 30m
     artifacts:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/*.aab
