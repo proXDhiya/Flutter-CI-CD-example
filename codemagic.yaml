@@ -42,7 +42,7 @@ workflows:
           firebase use --add $FIREBASE_PROJECT --token $FIREBASE_TOKEN
 
           # Upload the APK to Firebase App Distribution
-          firebase appdistribution:distribute "build/app/outputs/apk/release/app-release.apk" --release-notes "New release" --testers-file "testers.txt" --token $FIREBASE_TOKEN 
+          firebase appdistribution:distribute "build/app/outputs/apk/release/app-release.apk" --release-notes "New release" --testers-file "testers.txt" --token $FIREBASE_TOKEN --app $FIREBASE_PROJECT
     artifacts:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/*.aab
