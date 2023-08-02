@@ -61,7 +61,7 @@ workflows:
         - ios_credentials
         - gcloud_credentials
       vars:
-        FIREBASE_PROJECT: "flutter-integration-tests"
+        FIREBASE_PROJECT: "flutter-cicd-8e9bf"
         BUNDLE_ID: "io.codemagic.ftlflutter"
         TEST_BUNDLE_ID: "io.codemagic.ftlflutter.uitests.xctrunner"
     scripts:
