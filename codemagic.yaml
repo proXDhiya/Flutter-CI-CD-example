@@ -25,19 +25,26 @@ workflows:
       - name: Build APK with Flutter
         script: |
           flutter build apk --release
-      - name: Firebase Distribution
+      - name: Publish to Firebase App Distribution
         script: |
-          # Log in to Firebase with your credentials (replace 'YOUR_FIREBASE_TOKEN' with your actual token)
-          firebase login:ci --token "YOUR_FIREBASE_TOKEN"
-          # Deploy the APK to Firebase Distribution (replace 'YOUR_APP_ID' with your Firebase app ID)
-          firebase appdistribution:distribute "$CM_BUILD_DIR/android/app/build/outputs/apk/release/app-release.apk" --app "flutter-cicd-8e9bf" --release-notes "New release"
-      # - name: Publish to Firebase App Distribution
-      #   script: |
-      #     set -e
-      #     echo "$GOOGLE_CREDENTIALS" > ./gcloud_key_file.json
-      #     gcloud auth activate-service-account --key-file=gcloud_key_file.json
-      #     gcloud --quiet config set project $FIREBASE_PROJECT
-      #     gcloud firebase test android run --type robo --app build/app/outputs/apk/release/app-release.apk --timeout 30m
+          set -e
+          echo "$GOOGLE_CREDENTIALS" > ./gcloud_key_file.json
+          gcloud auth activate-service-account --key-file=gcloud_key_file.json
+          gcloud --quiet config set project $FIREBASE_PROJECT
+          # gcloud firebase test android run --type robo --app build/app/outputs/apk/release/app-release.apk --timeout 30m
+          # use firebase distribution not firebase test
+          if ! command -v firebase &> /dev/null; then
+            npm install -g firebase-tools
+          fi
+
+          # Authenticate with Firebase CLI
+          firebase login:ci --no-localhost --token "1//03r6HRaPnKohACgYIARAAGAMSNgF-L9IrDJ_0ntatFSzzboXTi-q0GsRf2NnoSy_zwGinp08mrjVX57vJ_r_YnQk98cQhpTCaUg"
+
+          # Set Firebase project
+          firebase use --add $FIREBASE_PROJECT
+
+          # Upload the APK to Firebase App Distribution
+          firebase appdistribution:distribute "build/app/outputs/apk/release/app-release.apk" --release-notes "New release" --testers-file "testers.txt" --token "1//03r6HRaPnKohACgYIARAAGAMSNgF-L9IrDJ_0ntatFSzzboXTi-q0GsRf2NnoSy_zwGinp08mrjVX57vJ_r_YnQk98cQhpTCaUg"
     artifacts:
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/*.aab
